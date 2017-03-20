@@ -39,12 +39,16 @@
     "webpack": "^2.2.1"
   },
   "devDependencies": {
+    "file-loader": "^0.10.1",
+    "image-webpack-loader": "^3.2.0",
+    "img-loader": "^2.0.0",
     "karma": "^0.13.22",
     "karma-chrome-launcher": "^0.2.2",
     "karma-mocha": "^0.2.2",
     "karma-mocha-reporter": "^2.0.0",
     "karma-sourcemap-loader": "^0.3.7",
     "karma-webpack": "^1.7.0",
-    "mocha": "^2.4.5"
+    "mocha": "^2.4.5",
+    "url-loader": "^0.5.8"
   }
 }

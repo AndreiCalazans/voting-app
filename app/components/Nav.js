@@ -5,8 +5,8 @@ const Nav = React.createClass({
     return (
       <div>
         <nav>
-          <div className="nav-wrapper teal">
-            <a href="#" className="col s-2 brand-logo left">Logo</a>
+          <div className="nav-wrapper teal valign-wrapper">
+            <a href="#" className="col s-2 brand-logo left">  <img className='valign logoImg center-align' src={require('VotingLogo.png')} alt=""/></a>
             <ul id="nav-mobile" className="col s-4">
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/polls'>Polls</Link></li>

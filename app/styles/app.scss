@@ -12,3 +12,62 @@ nav .brand-logo {
   position: relative;
   margin: 0 10px;
 }
+.main {
+  padding: 20px;
+}
+.fa-bolt {
+  color:yellow;
+}
+.fa-globe {
+  color: lightgreen;
+}
+.fa-twitter {
+  color: lightblue;
+}
+.card .card-image .card-title {
+  position:relative;
+  color:black;
+}
+.introContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: auto;
+
+  img {
+    max-width: 75px;
+    max-height: 75px;
+  }
+}
+.subTitle {
+  @extend .introContainer;
+  height:auto;
+  flex-direction: column;
+}
+.box {
+  margin: 1rem 0;
+}
+
+@media (max-width:450px) {
+  .introContainer {
+    h1{
+      font-size: 40px;
+    }
+    img {
+      max-width: 50px;
+      max-height: 50px;
+    }
+  }
+  .box {
+    margin: 1rem 0;
+    position: relative;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px 0px rgba(0,0,0,0.5);
+  }
+}
+
+.logoImg {
+  max-width: 50px;
+  max-height: 50px;
+}
