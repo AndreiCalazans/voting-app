@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router';
 const Nav = React.createClass({
   render() {
+
     return (
       <div>
         <nav>
@@ -13,8 +14,8 @@ const Nav = React.createClass({
               <li><Link to='/createPolls'>Create Polls</Link></li>
             </ul>
             <ul id="nav-mobile" className="right">
-              <li><Link>Sign in</Link></li>
-              <li><Link>Login</Link></li>
+              <li><Link to='/signup'>Sign up</Link></li>
+              <li><Link to='/login'>Login</Link></li>
             </ul>
 
           </div>
