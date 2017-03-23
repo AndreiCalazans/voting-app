@@ -4,6 +4,11 @@ export var isLogged = () => {
   };
 };
 
+export var notLogged = () => {
+  return {
+    type: 'NOT_LOGGED'
+  };
+};
 
 export var currentUser = (name) => {
   return {

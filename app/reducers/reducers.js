@@ -5,6 +5,11 @@ export var UserReducer = (state = {isLogged: false} , action) => {
         ...state,
         isLogged: true
       };
+    case 'NOT_LOGGED':
+      return {
+        ...state,
+        isLogged:false
+      };
     case "USER_NOW":
       return {
         ...state,

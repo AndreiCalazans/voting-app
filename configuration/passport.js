@@ -55,7 +55,6 @@ passport.serializeUser(function(user, done) {
   passport.use('local-login', new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
-    nameField: 'name',
     passReqToCallback: true
     },
     function(req, email, password, done) {
@@ -66,10 +65,10 @@ passport.serializeUser(function(user, done) {
           return done(null, false, console.log('user not found'));
         }
 
-        if (!user.validPassword(password)) {
+        if (user.password != password) {
           return done(null, false, console.log('wrong password'));
         }
         return done(null,user);
       });
     }));
-  }
+  };

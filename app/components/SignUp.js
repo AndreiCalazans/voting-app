@@ -15,7 +15,7 @@ const Signup = React.createClass({
     }).then((res) =>{
       console.log(res);
       dispatch(actions.isLogged());
-      dispatch(actions.currentUser(this.refs.name.value));
+      dispatch(actions.currentUser(res.data.name));
       browserHistory.push('/');
     }, (res) => {
       console.log('no good');
