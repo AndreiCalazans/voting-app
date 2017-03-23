@@ -1,5 +1,4 @@
 import React from 'react';
-import {Link} from 'react-router';
 
 
 const Home = React.createClass({
@@ -13,7 +12,7 @@ const Home = React.createClass({
           </div>
           <div className="subTitle col s12">
             <p >Create custom polls with live results!</p>
-            <button className='btn waves-effect waves-light'><Link style={{color: 'white'}} to='/signup'>Sign Up</Link></button>
+            <button className='btn waves-effect waves-light'>Sign Up</button>
           </div>
         </div>
         <div className="underBox col s12 row">

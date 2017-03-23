@@ -1,11 +1,11 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import { UserReducer } from 'reducers';
+import { } from 'reducers'
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
-    user: UserReducer
+
   });
 
   var store = redux.createStore( reducer, initialState , redux.compose(

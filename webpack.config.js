@@ -83,7 +83,7 @@ module.exports = {
                          loader: 'file-loader',
                          options: {
                            query: {
-                             name:'./public/[name].[ext]'
+                             name:'assets/[name].[ext]'
                            }
                          }
                        },
