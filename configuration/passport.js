@@ -52,25 +52,24 @@ passport.serializeUser(function(user, done) {
       })
     }
   ));
+  passport.use('local-login', new LocalStrategy({
+    usernameField: 'email',
+    passwordField: 'password',
+    nameField: 'name',
+    passReqToCallback: true
+    },
+    function(req, email, password, done) {
+      User.findOne({'email': email}, function(err, user){
+        if(err) return done(err);
 
-  // passport.use('local-login', new LocalStrategy({
-  //   usernameField: 'email',
-  //   passwordField: 'password',
-  //   nameField: 'name',
-  //   passReqToCallback: true
-  //   },
-  //   function(req, email, password, done) {
-  //     User.findOne({'email': email}, function(err, user){
-  //       if(err) return done(err);
-  //
-  //       if (!user) {
-  //         return done(null, false, console.log('user not found'));
-  //       }
-  //
-  //       if (!user.validPassword(password)) {
-  //         return done(null, false, console.log('wrong password'));
-  //       }
-  //       return done(null,user);
-  //     });
-  //   }));
+        if (!user) {
+          return done(null, false, console.log('user not found'));
+        }
+
+        if (!user.validPassword(password)) {
+          return done(null, false, console.log('wrong password'));
+        }
+        return done(null,user);
+      });
+    }));
   }

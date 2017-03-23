@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
 import * as actions from 'actions/actions';
-const Signin = React.createClass({
+const Signup = React.createClass({
   handleSignUp: function(e) {
     const {dispatch} = this.props
     e.preventDefault();
@@ -49,4 +49,4 @@ const Signin = React.createClass({
   }
 });
 
-export default connect()(Signin);
+export default connect()(Signup);

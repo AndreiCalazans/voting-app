@@ -8,7 +8,7 @@ import Home from 'Home';
 import SignUp from 'SignUp';
 import Login from 'Login';
 var store = require('configureStore').configure();
-import passport from 'passport';
+
 
 // var redirectIfLogged = (nextState, replace , next) => {
 // console.log(store.getState());

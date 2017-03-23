@@ -20,6 +20,8 @@ var store = require('configureStore').configure();
 //   document.getElementById('app')
 // );
 ReactDOM.render(
-  <div>Hello</div>,
+  <Provider store={store}>
+    {router}
+  </Provider>,
   document.getElementById('app')
 );
