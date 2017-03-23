@@ -12,6 +12,8 @@ require('app.scss');
 
 
 ReactDOM.render(
-  router,
+  <Provider store={store}>
+    {router}
+  </Provider>,
   document.getElementById('app')
 );

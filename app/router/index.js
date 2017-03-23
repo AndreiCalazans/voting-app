@@ -5,6 +5,10 @@ import Main from 'Main';
 import Polls from 'Polls';
 import CreatePolls from 'CreatePolls';
 import Home from 'Home';
+import SignUp from 'SignUp';
+import Login from 'Login';
+var store = require('configureStore').configure();
+
 
 
 export default (
