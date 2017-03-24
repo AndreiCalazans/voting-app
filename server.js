@@ -66,19 +66,25 @@ app.use(express.static('public'));
 
 app.post('/signup', passport.authenticate('local-signup'),  function(req, res) {
   let dude = req.user;
+  req.session.user = dude;
   res.send(dude);
 });
 app.post('/login', passport.authenticate('local-login'), function(req, res) {
   let dude = req.user;
+  req.session.user = dude;
   res.send(dude);
+});
+app.get('/session' , function(req, res) {
+  if (req.user == undefined) {
+    // console.log('no session for user');
+    res.sendStatus(404);
+  } else {
+    res.send(req.user);
+    // console.log('there is a session for this: ' , req.session.user);
+  }
 });
 
 app.get('/*', function (req, res) {
-  if (req.user == undefined) {
-    console.log('no session for user');
-  } else {
-    console.log('there is a session for this: ' , req.user);
-  }
   res.sendFile(__dirname + '/public/index.html');
 });
 

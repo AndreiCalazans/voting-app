@@ -1,3 +1,7 @@
+
+
+
+
 export var UserReducer = (state = {isLogged: false} , action) => {
   switch (action.type) {
     case 'IS_LOGGED':

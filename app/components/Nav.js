@@ -1,13 +1,24 @@
 import React from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
+import axios from 'axios';
 import * as actions from '../actions/actions';
 const Nav = React.createClass({
 
   handleLogOut: function() {
     var {dispatch} = this.props;
-  console.log('im logging out');
   dispatch(actions.notLogged());
+},
+  componentWillMount: function() {
+    var {dispatch} = this.props;
+    // to check if someone was previously logged
+      axios.get('/session' , {}).then((res)=>{
+        dispatch(actions.isLogged());
+        dispatch(actions.currentUser(res.data.name));
+      }, (res) => {
+
+      });
+
   },
   render() {
     var isLogged = this.props.user.isLogged;
