@@ -9,6 +9,7 @@ import router from 'router/index';
 //App css
 require('app.scss');
 
+var store = require('./store/configureStore').configure();
 
 
 ReactDOM.render(

@@ -1,5 +1,10 @@
 var express = require('express');
 var path = require('path');
+var passport = require('passport');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var flash = require('connect-flash');
+var cookieParser = require('cookie-parser');
 //create our app
 
 var app = express();
@@ -12,6 +17,20 @@ app.use(function(req, res, next){
     next();
   }
 });
+
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(cookieParser());
+app.use(session({
+  secret: 'mysupersecret',
+  resave: false,
+  saveUninitialized: false,
+  cookie: { maxAge: 180 * 60 * 1000 }
+}));
+app.use(flash());
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 app.use(express.static('public'));
