@@ -7,6 +7,7 @@ const Nav = React.createClass({
 
   handleLogOut: function() {
     var {dispatch} = this.props;
+    this.toggleModal();
   dispatch(actions.notLogged());
 },
   componentWillMount: function() {
@@ -20,6 +21,9 @@ const Nav = React.createClass({
       });
 
   },
+  toggleModal: function() {
+    this.refs.modal.classList.toggle('hide');
+  },
   render() {
     var isLogged = this.props.user.isLogged;
 
@@ -28,7 +32,7 @@ const Nav = React.createClass({
       if (isLogged){
         return (
           <ul id="nav-mobile" className="right">
-            <li><Link to='/' onClick={that.handleLogOut}>Log out</Link></li>
+            <li><Link to='/' onClick={that.toggleModal}>Log out</Link></li>
           </ul>
         )
       } else {
@@ -42,6 +46,11 @@ const Nav = React.createClass({
     };
     return (
       <div>
+        <div className='hide' ref='modal'  id='logoutModal'>
+          <p><strong>Are you sure you want to log out?</strong></p>
+          <button className='btn' onClick={this.handleLogOut}>Yes</button>
+          <button className='btn' onClick={this.toggleModal}>No</button>
+        </div>
         <nav>
           <div className="nav-wrapper teal valign-wrapper">
             <a href="#" className="col s-2 brand-logo left">  <img className='valign logoImg center-align' src={require('VotingLogo.png')} alt=""/></a>
