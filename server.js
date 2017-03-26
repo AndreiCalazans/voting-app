@@ -4,34 +4,17 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 // //create our app
 //
+var mongoose = require('mongoose');
 
 var cookieParser = require('cookie-parser');
 var bodyParser= require('body-parser');
-var session = require('express-session')
-
-
-
-
-// mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
-//
-// const userSchema = new mongoose.Schema({
-//   email: String,
-//   password: String,
-//   name: String
-// });
-//
-// const User = mongoose.model('User' , userSchema);
-// var firstOne = {
-//   email: 'dre@yahoo.com',
-//   password: '123',
-//   name: 'dre'
-// };
-//
-// User(firstOne).save();
-
+var session = require('express-session');
 
 var app = express();
 const PORT = process.env.PORT || 3000;
+
+
+mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
 
 app.use(function(req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https'){
@@ -69,7 +52,19 @@ app.post('/signup', passport.authenticate('local-signup'),  function(req, res) {
   req.session.user = dude;
   res.send(dude);
 });
+app.post('/signupWithFacebook', function(req, res) {
+  var account = req.body.user;
+  console.log(account);
+  handleFacebookLogin(account);
+  res.sendStatus(200);
+});
 app.post('/login', passport.authenticate('local-login'), function(req, res) {
+  let dude = req.user;
+  req.session.user = dude;
+  res.send(dude);
+});
+app.get('/login/facebook', passport.authenticate('facebook-login'));
+app.get('/auth/facebook/callback', passport.authenticate('facebook-login'), function(req, res) {
   let dude = req.user;
   req.session.user = dude;
   res.send(dude);
@@ -91,3 +86,25 @@ app.get('/*', function (req, res) {
 app.listen(PORT, function(){
   console.log('server is up on port ' + PORT);
 });
+
+
+
+var User = require('./models/User');
+var handleFacebookLogin = function(account) {
+  User.findOne({email: account.email}, function(err, user) {
+    if (err) throw err;
+    if (user) {
+      return console.log('account already exist');
+    } else {
+      var newUser = new User();
+      newUser.email = account.email;
+      newUser.name = account.name;
+      newUser.password = null;
+
+      newUser.save(function(err) {
+        if (err) throw err;
+        return console.log('New account created!');
+      })
+    }
+  })
+};

@@ -1,18 +1,13 @@
 var mongoose = require('mongoose');
 var LocalStrategy = require('passport-local').Strategy;
-
-
-
+var FacebookStrategy = require('passport-facebook').Strategy;
+//
+var User = require('../models/User');
 
 module.exports = function(passport) {
 
-  mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
-  const userSchema = new mongoose.Schema({
-    email: String,
-    password: String,
-    name: String
-  });
-  const User = mongoose.model('User', userSchema );
+  // mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
+
 
 passport.serializeUser(function(user, done) {
         done(null, user.id);
@@ -71,4 +66,33 @@ passport.serializeUser(function(user, done) {
         return done(null,user);
       });
     }));
+
+    passport.use('facebook-login',new FacebookStrategy({
+      clientID: '1087835221322773',
+      clientSecret: '6e42b05101d7d93db8ed08b00d59f95f',
+      callbackURL: "http://localhost:3000/auth/facebook/callback",
+      profileFields: ['name','email']
+    },
+    function(accessToken, refreshToken, profile, cb) {
+        User.findOne({'email': profile.email}, function(err , user) {
+          if ( err ) return done(err);
+
+          if (user) {
+            return done(null, user);
+          } else {
+            var newUser = new User();
+            newUser.name = profile.name;
+            newUser.email = profile.email;
+            newUser.password = null;
+
+            newUser.save(function(err) {
+              if (err) throw err;
+              return done(null, newUser);
+            });
+          }
+        })
+      }
+  ));
+
+
   };

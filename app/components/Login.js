@@ -3,6 +3,7 @@ import axios from 'axios';
 import {browserHistory} from 'react-router';
 import {connect} from 'react-redux';
 import * as actions from 'actions/actions';
+import FacebookLogin from 'react-facebook-login';
 
 const Login = React.createClass({
   handleLogIn: function(e) {
@@ -21,6 +22,9 @@ const Login = React.createClass({
       console.log('no good');
     });
   },
+  responseFacebook: function(res) {
+    console.log(res);
+  },
   render() {
     return (
       <div className='row'>
@@ -36,7 +40,14 @@ const Login = React.createClass({
           </div>
           <div className="row input-field">
             <input onClick={this.handleLogIn}  className="btn waves-effect waves-light" type="submit" name="action" />
-            <input className="btn waves-effect waves-light right" type="button" name="loginWithFacebook" value='Log in with facebook' />
+            <FacebookLogin
+              appId="1087835221322773"
+              autoLoad={false}
+              fields="name,email"
+              callback={this.responseFacebook}
+              cssClass="btn waves-effect waves-light right"
+              icon="fa-facebook"
+          />
           </div>
 
         </form>

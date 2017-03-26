@@ -3,6 +3,7 @@ import { startLogin} from '../actions/actions';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import {browserHistory} from 'react-router';
+import FacebookLogin from 'react-facebook-login';
 import * as actions from 'actions/actions';
 const Signup = React.createClass({
   handleSignUp: function(e) {
@@ -20,6 +21,20 @@ const Signup = React.createClass({
     }, (res) => {
       console.log('no good');
     });
+  },
+  responseFacebook: function(res) {
+    const {dispatch} = this.props;
+    console.log(res);
+    dispatch(actions.isLogged());
+    dispatch(actions.currentUser(res.name));
+    axios.post('/signupWithFacebook', {
+      user: res
+    }).then((res) => {
+      console.log(res);
+    }, (res) => {
+      console.log('problems');
+    });
+    browserHistory.push('/');
   },
   render() {
     return (
@@ -40,7 +55,15 @@ const Signup = React.createClass({
           </div>
           <div className="row input-field">
             <input onClick={this.handleSignUp} className="btn waves-effect waves-light" type="submit" name="action"/>
-            <input className="btn waves-effect waves-light right" type="button" name="signUpwithFacebook" value='Sign up with facebook' />
+            <FacebookLogin
+              appId="1087835221322773"
+              autoLoad={false}
+              fields="name,email"
+              callback={this.responseFacebook}
+              cssClass="btn waves-effect waves-light right"
+              icon="fa-facebook"
+          />
+
           </div>
 
         </form>
