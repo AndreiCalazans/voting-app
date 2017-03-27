@@ -1,7 +1,7 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {browserHistory} from 'react-router';
-
+import axios from 'axios';
 const CreatePolls = React.createClass({
   getInitialState: function(){
     return {
@@ -30,6 +30,30 @@ const CreatePolls = React.createClass({
       alert("Minimum 2 options");
     }
   },
+  handlePollCreate:function(e) {
+    e.preventDefault();
+    var email = this.props.user.email;
+    var name = this.props.user.name;
+    let inputs = {
+      createdBy: email,
+      name: name,
+      question: this.refs.question.value,
+      options: []
+    };
+    for (var i = 0 ; i < this.state.quantity ; i++) {
+      let option = 'option' + i;
+      inputs.options.push(this.refs[option].value);
+    };
+    axios.post('/createPoll', inputs).then((res)=>{
+      // create msg to say that poll was created then redirect to poll page to see it
+      // push to the page of the poll
+      browserHistory.push('/polls');
+    }, (res) => {
+      // send msg that something went wrong
+      console.log(res);
+    });
+
+  },
   render() {
     var that = this;
     function renderOptions() {
@@ -42,7 +66,7 @@ const CreatePolls = React.createClass({
           return (
 
             <div key={each} className="row input-field">
-              <input type="text" ref='option' placeholder='Option' className="validate"/>
+              <input type="text" ref={'option' + each} placeholder='Option' className="validate"/>
               <label htmlFor="option">Option</label>
             </div>
           )
@@ -51,20 +75,20 @@ const CreatePolls = React.createClass({
 
     return (
       <div className='row'>
-        <form ref='form' className='col s8 offset-s2' action="">
+        <form className='col s8 offset-s2' action="">
           <h1>Create your own Poll</h1>
           <div className="row input-field">
             <input type="text" ref='question' placeholder='Question' className="validate"/>
             <label htmlFor="name">Question</label>
           </div>
           {renderOptions()}
-          <div className="row input-field">
+          <div className="row input-field center-align">
             <input onClick={this.addOption}  className="btn option-btn waves-effect waves-light" type='button' name="action" value='Add more options'/>
             <input onClick={this.removeOption}  className="btn option-btn waves-effect waves-light" type='button' name="action" value='Remove an option'/>
           </div>
           <hr/>
-          <div className="row input-field">
-            <input  className="btn waves-effect waves-light" type="submit" name="action" value='Create Poll'/>
+          <div className="row input-field center-align">
+            <input onClick={this.handlePollCreate}  className="btn waves-effect waves-light" type="submit" name="action" value='Create Poll'/>
           </div>
 
 

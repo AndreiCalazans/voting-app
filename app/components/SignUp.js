@@ -43,7 +43,7 @@ const Signup = React.createClass({
     function renderMessage() {
       var messages = that.props.messages || 0;
       var dispatch = that.props.dispatch;
-      console.log(messages);
+      
       if (messages.length > 0) {
         setTimeout(() => {
           that.refs.dialogue.classList.add('hide');

@@ -57,6 +57,17 @@ require('./configuration/passport')(passport);
 
 app.use(express.static('public'));
 
+app.post('/createPoll' , function(req, res) {
+  let newPoll = req.body;
+  Poll(newPoll).save(function(err) {if(err) throw err});
+  res.sendStatus(200);
+});
+app.get('/allPolls' , function(req, res) {
+  Poll.find({} , function(err , poll) {
+    if (err) throw err;
+    res.send(poll);
+  })
+})
 
 app.post('/signup', passport.authenticate('local-signup'),  function(req, res) {
   let infoReturned = {
@@ -91,8 +102,10 @@ app.get('/session' , function(req, res) {
     // console.log('there is a session for this: ' , req.session.user);
   }
 });
-
-app.get('/*', function (req, res) {
+app.get('/:question', function(req, res) {
+  res.sendFile(__dirname + '/public/index.html');
+});
+app.get('*', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
@@ -116,7 +129,7 @@ var handleFacebookLogin = function(account) {
 
       newUser.save(function(err) {
         if (err) throw err;
-      
+
       })
     }
   })
