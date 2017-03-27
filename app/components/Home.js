@@ -8,7 +8,7 @@ const Home = React.createClass({
     function renderMessage() {
       var messages = that.props.messages || 0;
       var dispatch = that.props.dispatch;
-    
+
       if (messages.length > 0) {
         setTimeout(() => {
           that.refs.dialogue.classList.add('hide');
@@ -22,6 +22,18 @@ const Home = React.createClass({
         )
       }
     };
+    var that = this;
+    function renderMainBtn() {
+      if(that.props.user.isLogged) {
+        return (
+          <Link style={{color: 'white'}} to='/createPolls'>Create Poll</Link>
+        )
+      }else {
+        return (
+          <Link style={{color: 'white'}} to='/signup'>Sign Up</Link>
+        )
+      }
+    };
     return (
       <div>
         {renderMessage()}
@@ -32,7 +44,7 @@ const Home = React.createClass({
           </div>
           <div className="subTitle col s12">
             <p >Create custom polls with live results!</p>
-            <button className='btn waves-effect waves-light'><Link style={{color: 'white'}} to='/signup'>Sign Up</Link></button>
+            <button className='btn waves-effect waves-light'>{renderMainBtn()}</button>
           </div>
         </div>
         <div className="underBox col s12 row">
