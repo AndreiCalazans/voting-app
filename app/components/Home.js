@@ -1,11 +1,30 @@
 import React from 'react';
 import {Link} from 'react-router';
-
-
+import {connect} from 'react-redux';
+import * as actions from '../actions/actions';
 const Home = React.createClass({
   render() {
+    var that = this;
+    function renderMessage() {
+      var messages = that.props.messages || 0;
+      var dispatch = that.props.dispatch;
+    
+      if (messages.length > 0) {
+        setTimeout(() => {
+          that.refs.dialogue.classList.add('hide');
+          dispatch(actions.deleteMsg());
+        },2000);
+
+        return (
+          <div ref='dialogue' className="dialogue ">
+            <p>{messages}</p>
+          </div>
+        )
+      }
+    };
     return (
       <div>
+        {renderMessage()}
         <div className="main cyan lighten-4">
           <div className='introContainer col s12'>
             <h1 className='center-align'>VoteFast</h1>
@@ -63,4 +82,6 @@ const Home = React.createClass({
   }
 });
 
-export default Home;
+export default connect((state) => {
+  return state;
+})(Home);

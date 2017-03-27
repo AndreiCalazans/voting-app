@@ -9,12 +9,23 @@ var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser= require('body-parser');
 var session = require('express-session');
-
+var Poll = require('./models/Polls');
 var app = express();
 const PORT = process.env.PORT || 3000;
 
 
 mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
+
+// var newPoll = {
+//   question: 'what is your favorite color',
+//   options: [
+//     'blue','red', 'white'
+//   ],
+//   createdBy: 'Andrei'
+// };
+// Poll(newPoll).save();
+
+
 
 app.use(function(req, res, next){
   if (req.headers['x-forwarded-proto'] === 'https'){
@@ -48,27 +59,29 @@ app.use(express.static('public'));
 
 
 app.post('/signup', passport.authenticate('local-signup'),  function(req, res) {
-  let dude = req.user;
-  req.session.user = dude;
-  res.send(dude);
+  let infoReturned = {
+    user: req.user,
+    messages: req.flash('success')[0] || req.flash('error')[0]
+  };
+  req.session.user = req.user;
+  res.send(infoReturned);
 });
 app.post('/signupWithFacebook', function(req, res) {
   var account = req.body.user;
-  console.log(account);
+
   handleFacebookLogin(account);
   res.sendStatus(200);
 });
 app.post('/login', passport.authenticate('local-login'), function(req, res) {
-  let dude = req.user;
-  req.session.user = dude;
-  res.send(dude);
+  let infoReturned = {
+    user: req.user,
+    messages: req.flash('success')[0] || req.flash('error')[0]
+  };
+  req.session.user = req.user;
+  res.send(infoReturned);
 });
-app.get('/login/facebook', passport.authenticate('facebook-login'));
-app.get('/auth/facebook/callback', passport.authenticate('facebook-login'), function(req, res) {
-  let dude = req.user;
-  req.session.user = dude;
-  res.send(dude);
-});
+
+
 app.get('/session' , function(req, res) {
   if (req.user == undefined) {
     // console.log('no session for user');
@@ -103,7 +116,7 @@ var handleFacebookLogin = function(account) {
 
       newUser.save(function(err) {
         if (err) throw err;
-        return console.log('New account created!');
+      
       })
     }
   })

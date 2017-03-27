@@ -16,29 +16,50 @@ const Signup = React.createClass({
     }).then((res) =>{
       console.log(res);
       dispatch(actions.isLogged());
-      dispatch(actions.currentUser(res.data.name));
+      dispatch(actions.currentUser(res.data.user.name , res.data.user.email));
+      dispatch(actions.flashMsg(res.data.messages));
       browserHistory.push('/');
     }, (res) => {
-      console.log('no good');
+      dispatch(actions.flashMsg('User already exists, change email'));
     });
   },
   responseFacebook: function(res) {
     const {dispatch} = this.props;
-    console.log(res);
     dispatch(actions.isLogged());
-    dispatch(actions.currentUser(res.name));
+    dispatch(actions.currentUser(res.name, res.email));
+    dispatch(actions.flashMsg('welcome, you are logged in'));
     axios.post('/signupWithFacebook', {
       user: res
     }).then((res) => {
       console.log(res);
     }, (res) => {
-      console.log('problems');
+      dispatch(actions.flashMsg('Oops!, something is wrong, try again'));
+
     });
     browserHistory.push('/');
   },
   render() {
+    var that = this;
+    function renderMessage() {
+      var messages = that.props.messages || 0;
+      var dispatch = that.props.dispatch;
+      console.log(messages);
+      if (messages.length > 0) {
+        setTimeout(() => {
+          that.refs.dialogue.classList.add('hide');
+          dispatch(actions.deleteMsg());
+        },2000);
+
+        return (
+          <div ref='dialogue' className="dialogue ">
+            <p>{messages}</p>
+          </div>
+        )
+      }
+    };
     return (
       <div className='row'>
+        {renderMessage()}
         <form className='col s6 offset-s3' action="">
           <h1>Sign Up</h1>
           <div className="row input-field">
@@ -72,4 +93,6 @@ const Signup = React.createClass({
   }
 });
 
-export default connect()(Signup);
+export default connect((state) => {
+  return state;
+})(Signup);

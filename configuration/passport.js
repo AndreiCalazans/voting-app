@@ -31,7 +31,7 @@ passport.serializeUser(function(user, done) {
       User.findOne({email: email}, function (err, user) {
         if ( err) return done(err);
         if (user) {
-          return done(null, false, console.log('account already exist'));
+          return done(null, false);
         } else {
           var newUser = new User();
 
@@ -41,7 +41,7 @@ passport.serializeUser(function(user, done) {
 
           newUser.save(function(err) {
             if (err) throw err;
-            return done(null , newUser);
+            return done(null , newUser , req.flash('success', 'new user was created!'));
           });
         }
       })
@@ -57,42 +57,42 @@ passport.serializeUser(function(user, done) {
         if(err) return done(err);
 
         if (!user) {
-          return done(null, false, console.log('user not found'));
+          return done(null, false);
         }
 
         if (user.password != password) {
-          return done(null, false, console.log('wrong password'));
+          return done(null, false);
         }
-        return done(null,user);
+        return done(null,user, req.flash('success' , 'Welcome, you are logged in!'));
       });
     }));
 
-    passport.use('facebook-login',new FacebookStrategy({
-      clientID: '1087835221322773',
-      clientSecret: '6e42b05101d7d93db8ed08b00d59f95f',
-      callbackURL: "http://localhost:3000/auth/facebook/callback",
-      profileFields: ['name','email']
-    },
-    function(accessToken, refreshToken, profile, cb) {
-        User.findOne({'email': profile.email}, function(err , user) {
-          if ( err ) return done(err);
-
-          if (user) {
-            return done(null, user);
-          } else {
-            var newUser = new User();
-            newUser.name = profile.name;
-            newUser.email = profile.email;
-            newUser.password = null;
-
-            newUser.save(function(err) {
-              if (err) throw err;
-              return done(null, newUser);
-            });
-          }
-        })
-      }
-  ));
+  //   passport.use('facebook-login',new FacebookStrategy({
+  //     clientID: '1087835221322773',
+  //     clientSecret: '6e42b05101d7d93db8ed08b00d59f95f',
+  //     callbackURL: "http://localhost:3000/auth/facebook/callback",
+  //     profileFields: ['name','email']
+  //   },
+  //   function(accessToken, refreshToken, profile, cb) {
+  //       User.findOne({'email': profile.email}, function(err , user) {
+  //         if ( err ) return done(err);
+  //
+  //         if (user) {
+  //           return done(null, user);
+  //         } else {
+  //           var newUser = new User();
+  //           newUser.name = profile.name;
+  //           newUser.email = profile.email;
+  //           newUser.password = null;
+  //
+  //           newUser.save(function(err) {
+  //             if (err) throw err;
+  //             return done(null, newUser, req.flash('success', 'welcome, you are logged in!'));
+  //           });
+  //         }
+  //       })
+  //     }
+  // ));
 
 
   };
