@@ -1,10 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-// you must get the poll from the db
-// this will be done by a API call
-// shall show question and options
-// the options should be a separate compo.
-// in order to swap with the result component once done
+
+
+
 import Results from 'Results';
 export var Poll = React.createClass({
   getInitialState: function() {
@@ -15,7 +13,7 @@ export var Poll = React.createClass({
   },
   componentWillMount: function() {
     axios.get('/poll/'+this.props.params.question, {}).then((res) => {
-      console.log(res.data[0].options);
+
       this.setState({options: res.data[0].options});
     }, (res) => {
       console.log('error', res);
@@ -26,7 +24,6 @@ export var Poll = React.createClass({
     var inputs = document.getElementsByName('option');
     for (var i = 0 ; i < inputs.length ; i++) {
       if (inputs[i].checked) {
-        console.log(inputs[i].value);
         axios.post('/vote' , {selected: inputs[i].value , question: this.props.params.question}).then((res) => {
           // if it is good render the result component;
 
@@ -34,13 +31,16 @@ export var Poll = React.createClass({
               showResult:true
             });
 
-          console.log('success' );
+
         }, (res) => {
-          console.log('failed');
+
         })
       }
     }
 
+  },
+  handleShowResults: function() {
+    this.setState({showResult: true})
   },
   render() {
     var that = this;
@@ -72,6 +72,7 @@ export var Poll = React.createClass({
         return (
           <div className="row input-field">
               <input onClick={that.handleVote} className="btn waves-effect waves-light" type="submit" value='VOTE' name="action"/>
+              <input onClick={that.handleShowResults} className="btn waves-effect waves-light"  value='Results' name="action"/>
           </div>
         )
       }
@@ -87,6 +88,7 @@ export var Poll = React.createClass({
               {renderOptions()}
 
               {renderBtn()}
+
             </form>
           </div>
         </div>

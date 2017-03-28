@@ -24,6 +24,10 @@ nav .brand-logo {
 .fa-twitter {
   color: lightblue;
 }
+.fa-bar-chart , .fa-trash-o {
+  margin: 0 5px;
+  cursor: pointer;
+}
 .card .card-image .card-title {
   position:relative;
   color:black;
@@ -113,5 +117,12 @@ box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
 }
 .options {
   padding: 10px;
-  
+}
+.filter  {
+  cursor: pointer;
+
+}
+.selected {
+  font-weight: bold;
+  user-select: none;
 }

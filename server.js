@@ -104,7 +104,12 @@ app.post('/vote', function(req, res) {
   })
 
 })
-
+app.post('/delete', function(req, res) {
+  Poll.remove({question: req.body.question},function(err) {
+    if (err) throw err;
+    res.sendStatus(200);
+  });
+});
 app.get('/session' , function(req, res) {
   if (req.user == undefined) {
     // console.log('no session for user');
