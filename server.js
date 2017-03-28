@@ -92,6 +92,18 @@ app.post('/login', passport.authenticate('local-login'), function(req, res) {
   res.send(infoReturned);
 });
 
+app.post('/vote', function(req, res) {
+  Poll.find({question: req.body.question}, {options: { $elemMatch: {value: req.body.selected}}} , function(err , element) {
+    if (err) throw err;
+    let preVal = element[0].options[0].vote;
+    element[0].options[0].vote = preVal + 1;
+    element[0].save(function(err) {
+      if ( err ) throw err;
+      res.sendStatus(200);
+    })
+  })
+
+})
 
 app.get('/session' , function(req, res) {
   if (req.user == undefined) {
@@ -102,8 +114,13 @@ app.get('/session' , function(req, res) {
     // console.log('there is a session for this: ' , req.session.user);
   }
 });
-app.get('/:question', function(req, res) {
-  res.sendFile(__dirname + '/public/index.html');
+
+// this returns only one question with its data
+app.get('/poll/:question', function(req, res, next) {
+  Poll.find({question: req.params.question}, function(err , question) {
+    if (err) throw err;
+    res.send(question);
+  })
 });
 app.get('*', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');

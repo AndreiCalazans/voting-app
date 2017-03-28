@@ -19,7 +19,7 @@ const Polls = React.createClass({
       if (that.state.Polls) {
         return that.state.Polls.map((poll) => {
             return (
-              <li key={poll._id} className="collection-item"><div><Link to={'/' + poll.question}>{poll.question}</Link><i className="material-icons secondary-content">{poll.name}</i></div></li>
+              <li key={poll._id} className="collection-item"><div><Link to={'/' + poll.question}>{poll.question}?</Link><i className="material-icons secondary-content">{poll.name}</i></div></li>
             )
           });
 

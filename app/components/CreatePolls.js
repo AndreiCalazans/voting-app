@@ -32,17 +32,24 @@ const CreatePolls = React.createClass({
   },
   handlePollCreate:function(e) {
     e.preventDefault();
+    let question = this.refs.question.value;
+    if (question.match(/[\?]/g)) {
+      question.match(/[\?]/g).forEach((value)=> {
+        question = question.replace(value, '');
+      })
+    };
+
     var email = this.props.user.email;
     var name = this.props.user.name;
     let inputs = {
       createdBy: email,
       name: name,
-      question: this.refs.question.value,
+      question: question,
       options: []
     };
     for (var i = 0 ; i < this.state.quantity ; i++) {
       let option = 'option' + i;
-      inputs.options.push(this.refs[option].value);
+      inputs.options.push({value: this.refs[option].value, vote: 0});
     };
     axios.post('/createPoll', inputs).then((res)=>{
       // create msg to say that poll was created then redirect to poll page to see it
