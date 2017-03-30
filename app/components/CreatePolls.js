@@ -82,7 +82,7 @@ const CreatePolls = React.createClass({
 
     return (
       <div className='row'>
-        <form className='col s8 offset-s2' action="">
+        <form className='col s10 offset-s1 m8 offset-m2' action="">
           <h1>Create your own Poll</h1>
           <div className="row input-field">
             <input type="text" ref='question' placeholder='Question' className="validate"/>

@@ -70,9 +70,9 @@ export var Poll = React.createClass({
     function renderBtn() {
       if(!that.state.showResult) {
         return (
-          <div className="row input-field">
-              <input onClick={that.handleVote} className="btn waves-effect waves-light" type="submit" value='VOTE' name="action"/>
-              <input onClick={that.handleShowResults} className="btn waves-effect waves-light"  value='Results' name="action"/>
+          <div className="row input-field poll-btns">
+              <input onClick={that.handleVote} className="poll-btn btn waves-effect waves-light" type="submit" value='VOTE' name="action"/>
+              <input onClick={that.handleShowResults} className="poll-btn btn waves-effect waves-light " type='buttom'  value='Results' name="action"/>
           </div>
         )
       }

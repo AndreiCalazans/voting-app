@@ -2,12 +2,20 @@ import React from 'react';
 import Nav from 'Nav';
 
 const Home = React.createClass({
+  handleSideBar: function() {
+    console.log(document.getElementById('side-bar'));
+      if (document.getElementById('side-bar').style.left == '0px') {
+        document.getElementById('side-bar').style.left = '-100%';
+      }
+  },
   render() {
     return (
       <div>
         <Nav></Nav>
-      
-        {this.props.children}
+        <div className='childrenContainer' onClick={this.handleSideBar}>
+
+          {this.props.children}
+        </div>
       </div>
     )
   }

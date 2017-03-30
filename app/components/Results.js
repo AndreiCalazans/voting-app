@@ -63,9 +63,9 @@ var Results = React.createClass({
   render() {
 
     return (
-      <div>
-    
-        <canvas ref='myChart' id="myChart" width="400" height="400"></canvas>
+      <div className='controlChart'>
+
+        <canvas ref='myChart' id="myChart"></canvas>
 
       </div>
     )

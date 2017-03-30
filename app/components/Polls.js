@@ -1,7 +1,8 @@
 import React from 'react';
 import axios from 'axios';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 import {connect} from 'react-redux';
+
 const Polls = React.createClass({
   getInitialState: function() {
     return {
@@ -27,7 +28,10 @@ const Polls = React.createClass({
   handleDeletePoll: function(quest) {
     var that = this;
     axios.post('/delete', {question: quest}).then((res) => {
-      that.setState(that.state);
+      let newState = that.state.Polls.filter((each) => {
+        return each.question != quest;
+      });
+      that.setState({Polls: newState});
     }, (res) => {
       console.log(res);
     })
@@ -62,8 +66,11 @@ const Polls = React.createClass({
                   <Link to={'/' + poll.question}>{poll.question}?</Link>
                   <i className="material-icons secondary-content">
                     {deleteBtn()}
-                
-                    {poll.name}
+
+                    <i className='hide-on-small-only'>
+                      {poll.name}
+                    </i>
+
                   </i>
                 </div>
               </li>

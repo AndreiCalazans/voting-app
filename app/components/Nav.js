@@ -3,14 +3,18 @@ import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import axios from 'axios';
 import * as actions from '../actions/actions';
-const Nav = React.createClass({
+// import $ from 'jquery';
 
+
+
+const Nav = React.createClass({
   handleLogOut: function() {
     var {dispatch} = this.props;
     this.toggleModal();
   dispatch(actions.notLogged());
 },
   componentWillMount: function() {
+
     var {dispatch} = this.props;
     // to check if someone was previously logged
       axios.get('/session' , {}).then((res)=>{
@@ -21,8 +25,21 @@ const Nav = React.createClass({
       });
 
   },
+  handleSideBar: function() {
+      if (document.getElementById('side-bar').style.left == '0px') {
+        document.getElementById('side-bar').style.left = '-100px';
+      }
+  },
   toggleModal: function() {
     this.refs.modal.classList.toggle('hide');
+  },
+  handleSideBar: function() {
+    if(this.refs.side.style.left == '0px') {
+      this.refs.side.style.left = '-100%';
+
+    }else {
+      this.refs.side.style.left = 0;
+    }
   },
   render() {
     var isLogged = this.props.user.isLogged;
@@ -37,7 +54,7 @@ const Nav = React.createClass({
         )
       } else {
         return (
-          <ul id="nav-mobile" className="right">
+          <ul id="" className="right">
             <li><Link to='/signup'>Sign up</Link></li>
             <li><Link to='/login'>Login</Link></li>
           </ul>
@@ -53,15 +70,28 @@ const Nav = React.createClass({
         </div>
         <nav>
           <div className="nav-wrapper teal valign-wrapper">
-            <a href="#" className="col s-2 brand-logo left">  <img className='valign logoImg center-align' src={require('VotingLogo.png')} alt=""/></a>
-            <ul id="nav-mobile" className="col s-4">
+            <Link to='/' className="col s-2 brand-logo left">  <img className='valign logoImg center-align' src={require('VotingLogo.png')} alt=""/></Link>
+
+            <ul id="nav-mobile" className="hide-on-small-only">
               <li><Link to='/'>Home</Link></li>
               <li><Link to='/polls'>Polls</Link></li>
               <li><Link to='/createPolls'>Create Polls</Link></li>
+              {renderUserControls()}
             </ul>
-            {renderUserControls()}
+            <i className="fa fa-bars hide-on-med-and-up fa-2x" onClick={this.handleSideBar} aria-hidden="true"></i>
+
+
+
           </div>
         </nav>
+        <div onClick={this.handleSideBar} className="side-container">
+          <ul ref='side' id="side-bar" className="hide-on-med-and-up">
+            <li><Link to='/'>Home</Link></li>
+            <li><Link to='/polls'>Polls</Link></li>
+            <li><Link to='/createPolls'>Create Polls</Link></li>
+            {renderUserControls()}
+          </ul>
+        </div>
       </div>
     )
   }

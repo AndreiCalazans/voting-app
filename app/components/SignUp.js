@@ -43,7 +43,7 @@ const Signup = React.createClass({
     function renderMessage() {
       var messages = that.props.messages || 0;
       var dispatch = that.props.dispatch;
-      
+
       if (messages.length > 0) {
         setTimeout(() => {
           that.refs.dialogue.classList.add('hide');
@@ -60,7 +60,7 @@ const Signup = React.createClass({
     return (
       <div className='row'>
         {renderMessage()}
-        <form className='col s6 offset-s3' action="">
+        <form className='col s12 m10 offset-m1' action="">
           <h1>Sign Up</h1>
           <div className="row input-field">
             <input type="text" ref='name' placeholder='Name' className="validate"/>
@@ -74,7 +74,7 @@ const Signup = React.createClass({
             <input type="password" ref='password' placeholder='Password' className="validate"/>
             <label htmlFor="password">Password</label>
           </div>
-          <div className="row input-field">
+          <div className="row input-field btn-box">
             <input onClick={this.handleSignUp} className="btn waves-effect waves-light" type="submit" name="action"/>
             <FacebookLogin
               appId="1087835221322773"

@@ -59,7 +59,7 @@ const Login = React.createClass({
     return (
       <div className='row'>
         {renderMessage()}
-        <form className='col s6 offset-s3' action="" >
+        <form className='col s12 m10 offset-m1' action="" >
           <h1>Login</h1>
           <div className="row input-field">
             <input type="email" ref='email' id='email' placeholder='Email' className="validate"/>
@@ -69,7 +69,7 @@ const Login = React.createClass({
             <input type="password" ref='password' id='password' placeholder='Password' className="validate"/>
             <label htmlFor="password">Password</label>
           </div>
-          <div className="row input-field">
+          <div className="row input-field btn-box">
             <input onClick={this.handleLogIn}  className="btn waves-effect waves-light" type="submit" name="action" />
             <FacebookLogin
               appId="1087835221322773"
