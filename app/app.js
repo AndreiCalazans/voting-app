@@ -11,13 +11,6 @@ require('app.scss');
 var store = require('configureStore').configure();
 
 
-//
-// ReactDOM.render(
-//   <Provider store={store}>
-//     {router}
-//   </Provider>,
-//   document.getElementById('app')
-// );
 ReactDOM.render(
   <Provider store={store}>
     <Router routes={routes} history={browserHistory}></Router>

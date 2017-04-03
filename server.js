@@ -6,15 +6,16 @@ var flash    = require('connect-flash');
 //
 var mongoose = require('mongoose');
 
+require('dotenv').config();
 var cookieParser = require('cookie-parser');
 var bodyParser= require('body-parser');
 var session = require('express-session');
 var Poll = require('./models/Polls');
 var app = express();
+
 const PORT = process.env.PORT || 3000;
 
-
-mongoose.connect('mongodb://andrei:123456@ds137730.mlab.com:37730/voting-app');
+mongoose.connect('mongodb://'+process.env.DB_NAME+':'+process.env.DB_PASS+'@ds137730.mlab.com:37730/voting-app');
 
 // var newPoll = {
 //   question: 'what is your favorite color',

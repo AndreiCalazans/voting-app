@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "npm run build && node server.js",
-    "test": "NODE_ENV=test karma start",
-    "build": "webpack"
+    "start": "node server"
   },
   "author": "",
   "license": "ISC",
@@ -31,7 +29,6 @@
     "method-override": "^2.3.7",
     "mongoose": "^4.9.1",
     "morgan": "^1.8.1",
-    "node-env-file": "^0.1.8",
     "node-sass": "^4.5.0",
     "passport": "^0.3.2",
     "passport-facebook": "^2.1.1",
@@ -53,14 +50,8 @@
   "devDependencies": {
     "file-loader": "^0.10.1",
     "image-webpack-loader": "^3.2.0",
+    "dotenv": "^4.0.0",
     "img-loader": "^2.0.0",
-    "karma": "^0.13.22",
-    "karma-chrome-launcher": "^0.2.2",
-    "karma-mocha": "^0.2.2",
-    "karma-mocha-reporter": "^2.0.0",
-    "karma-sourcemap-loader": "^0.3.7",
-    "karma-webpack": "^1.7.0",
-    "mocha": "^2.4.5",
     "url-loader": "^0.5.8"
   }
 }
