@@ -129,8 +129,7 @@ export var Poll = React.createClass({
             </form>
             {renderBtn()}
 
-            <div className="fb-share-button" data-href="http://localhost:3000/polls" data-layout="button" data-size="small" data-mobile-iframe="true"><a className="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flocalhost%3A3000%2Fpolls&amp;src=sdkpreparse">Share</a></div>
-
+<div class="fb-share-button" data-href="http://andrei-voting-app.herokuapp.com" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fandrei-voting-app.herokuapp.com%2F&amp;src=sdkpreparse">Share</a></div>
             <a className='twitter-share-button' target = '_blank' href={currentUrlToTweet}>
               <i className="fa fa-twitter" aria-hidden="true"></i>
               Tweet
