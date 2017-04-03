@@ -1,10 +1,13 @@
 import * as redux from 'redux';
 import thunk from 'redux-thunk';
 
-import { } from 'reducers'
+
+import { UserReducer, MessageReducer } from 'reducers';
 
 export var configure = (initialState = {}) => {
   var reducer = redux.combineReducers({
+    user: UserReducer,
+    messages: MessageReducer
 
   });
 

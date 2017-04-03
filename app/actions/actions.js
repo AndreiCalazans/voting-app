@@ -5,9 +5,22 @@ export var notLogged = () => {
   };
 };
 
-export var currentUser = (name) => {
+export var currentUser = (name , email) => {
   return {
     type: 'USER_NOW',
-    name
+    name,
+    email
+  };
+};
+export var flashMsg = (messages) => {
+  return {
+    type: 'FLASH_MESSAGE',
+    messages
+  };
+};
+
+export var deleteMsg = () => {
+  return {
+    type: 'DELETE_MESSAGE'
   };
 };
