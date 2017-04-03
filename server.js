@@ -4,6 +4,7 @@ var passport = require('passport');
 var flash    = require('connect-flash');
 // //create our app
 //
+var favicon = require('serve-favicon');
 var mongoose = require('mongoose');
 
 require('dotenv').config();
@@ -36,6 +37,7 @@ app.use(function(req, res, next){
   }
 });
 //
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(cookieParser()); // read cookies (needed for auth)
 app.use(bodyParser.urlencoded({extended: true}));
 
