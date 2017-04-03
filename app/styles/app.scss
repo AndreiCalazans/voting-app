@@ -3,11 +3,30 @@
 
 
 // Components
+.twitter-share-button {
+  color: white;
+    background: #4267b2;
+    padding: 2px;
+    border-radius: 8%;
+    margin: 5px;
+    font-size: 13px;
+  i {
+    color:white;
+    margin: 2px;
+  }
+}
 
 .active {
   font-weight: bold;
 }
+#checkMark {
+  background: none;
+  border: none;
+}
+#addOptionContainer {
+  display: flex;
 
+}
 nav .brand-logo {
   position: relative;
   margin: 0 10px;
@@ -51,9 +70,7 @@ nav .brand-logo {
 .box {
   margin: 1rem 0;
 }
-.fa-bars {
-  display:none;
-}
+
 .btn-box {
   display: flex !important;
 }
@@ -132,10 +149,11 @@ nav .brand-logo {
   max-height: 50px;
 }
 
-.fa-bars {
+.barsContainer {
   display: flex !important;
-  align-items: center;
+
   position: absolute;
+  top:10px;
   right: 10px;
 }
 #logoutModal {

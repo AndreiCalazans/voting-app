@@ -91,7 +91,18 @@ app.post('/login', passport.authenticate('local-login'), function(req, res) {
   req.session.user = req.user;
   res.send(infoReturned);
 });
-
+app.post('/update/options', function(req, res) {
+  Poll.find({question: req.body.question}, function(err , question) {
+    if (err) throw err;
+    let newOption = {
+      value: req.body.newOption,
+      vote: 0
+    };
+    question[0].options.push(newOption);
+    question[0].save(function(err) {if (err) throw err;});
+    res.sendStatus(200);
+  });
+});
 app.post('/vote', function(req, res) {
   Poll.find({question: req.body.question}, {options: { $elemMatch: {value: req.body.selected}}} , function(err , element) {
     if (err) throw err;

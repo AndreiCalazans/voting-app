@@ -78,7 +78,10 @@ const Nav = React.createClass({
               <li><Link to='/createPolls'>Create Polls</Link></li>
               {renderUserControls()}
             </ul>
-            <i className="fa fa-bars hide-on-med-and-up fa-2x" onClick={this.handleSideBar} aria-hidden="true"></i>
+            <div className="barsContainer hide-on-med-and-up">
+              <i className="hide-on-med-and-up fa fa-bars fa-2x" onClick={this.handleSideBar} aria-hidden="true"></i>
+            </div>
+
 
 
 
