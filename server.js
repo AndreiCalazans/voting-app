@@ -14,6 +14,7 @@ var session = require('express-session');
 var Poll = require('./models/Polls');
 var app = express();
 
+var MongoStore = require('connect-mongo')(session);
 const PORT = process.env.PORT || 3000;
 
 mongoose.connect('mongodb://'+process.env.DB_NAME+':'+process.env.DB_PASS+'@ds137730.mlab.com:37730/voting-app');
@@ -45,11 +46,11 @@ app.use(bodyParser.json());// get information from html forms
 
 // required for passport
 app.use(session({
-  secret:   'andrei',
-     name: 'votingapp', // connect-mongo session store
-     proxy: true,
-     resave: true,
-     saveUninitialized: true
+  secret: 'mysupersecret',
+resave: false,
+saveUninitialized: false,
+store: new MongoStore({ mongooseConnection: mongoose.connection}),
+cookie: { maxAge: 180 * 60 * 1000 }
 
  })); // session secret
 app.use(passport.initialize());
