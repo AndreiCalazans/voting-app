@@ -87,7 +87,7 @@ const Home = React.createClass({
           </div>
         </div>
         <footer>
-          <p className='center-align'>Made by <a href="">Andrei Calazans</a></p>
+          <p className='center-align'>Made by <a href="https://andreicalazans.github.io/">Andrei Calazans</a></p>
         </footer>
       </div>
     )

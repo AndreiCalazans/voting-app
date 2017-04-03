@@ -10,9 +10,9 @@ const CreatePolls = React.createClass({
   },
   componentWillMount: function() {
     var {user} = this.props;
-    // if (!user.isLogged) {
-    //   browserHistory.push('/login')
-    // }
+    if (!user.isLogged) {
+      browserHistory.push('/login')
+    }
   },
   addOption: function() {
     var current = this.state.quantity + 1;
@@ -57,7 +57,6 @@ const CreatePolls = React.createClass({
       browserHistory.push('/polls');
     }, (res) => {
       // send msg that something went wrong
-      console.log(res);
     });
 
   },

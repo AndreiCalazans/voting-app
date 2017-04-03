@@ -16,7 +16,7 @@ export var Poll = React.createClass({
 
       this.setState({options: res.data[0].options});
     }, (res) => {
-      console.log('error', res);
+
     })
   },
   handleVote: function(e) {
@@ -60,9 +60,9 @@ export var Poll = React.createClass({
           newOption
         ]
       });
-      console.log('ok');
+
       this.refs.optionForm.classList.add('hide');
-    }, ()=> { console.log('error');
+    }, ()=> {
   })
   },
   render() {
@@ -102,8 +102,7 @@ export var Poll = React.createClass({
       }
     };
     let currentUrl = this.props.location.pathname;
-// https://twitter.com/intent/tweet?hashtags=demo&original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text=Hello%20world&tw_p=tweetbutton&url=https%3A%2F%2Fexample.com%2Ffoo&via=twitterdev
-    let currentUrlToTweet =`https://twitter.com/intent/tweet?hashtags=poll&original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text=Hello%20check%20my%20poll&tw_p=tweetbutton&url=https%3A%2F%2Fexample.com%2F${'polls'}&via=Andrei_Calazans`;
+    let currentUrlToTweet =`https://twitter.com/intent/tweet?hashtags=poll&original_referer=https%3A%2F%2Fdev.twitter.com%2Fweb%2Ftweet-button&ref_src=twsrc%5Etfw&related=twitterapi%2Ctwitter&text=Hello%20check%20my%20poll&tw_p=tweetbutton&url=http%3A%2F%2Fandrei-voting-app.herokuapp.com%2F${'polls'}&via=Andrei_Calazans`;
     return (
       <div className='row'>
         <div className="col m10 offset-m1">

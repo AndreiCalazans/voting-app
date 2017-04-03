@@ -57,7 +57,7 @@ var Results = React.createClass({
           }
       });
     }, (res) => {
-      console.log('error', res);
+      
     })
   },
   render() {

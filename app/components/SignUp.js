@@ -14,7 +14,7 @@ const Signup = React.createClass({
       password: this.refs.password.value,
       name: this.refs.name.value
     }).then((res) =>{
-      console.log(res);
+
       dispatch(actions.isLogged());
       dispatch(actions.currentUser(res.data.user.name , res.data.user.email));
       dispatch(actions.flashMsg(res.data.messages));
@@ -31,7 +31,7 @@ const Signup = React.createClass({
     axios.post('/signupWithFacebook', {
       user: res
     }).then((res) => {
-      console.log(res);
+    
     }, (res) => {
       dispatch(actions.flashMsg('Oops!, something is wrong, try again'));
 

@@ -33,7 +33,7 @@ const Polls = React.createClass({
       });
       that.setState({Polls: newState});
     }, (res) => {
-      console.log(res);
+    
     })
   },
   render() {
